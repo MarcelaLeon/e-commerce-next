@@ -73,7 +73,7 @@ const TerminosYCondiciones = ({ data }: Props) => {
 
 export async function getStaticProps() {
 
-  const response = await fetch('https://tienda-libre-ten.vercel.app/api/tycs');
+  const response = await fetch(process.env.BASE_URL + 'api/tycs');
   const data: TyCsAPIResponse = await response.json();
 
   return {

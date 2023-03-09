@@ -108,7 +108,7 @@ const Home = ({ data }: Props) => {
 
 export async function getServerSideProps() {
 
-  const response = await fetch('https://tienda-libre-ten.vercel.app/api/products');
+  const response = await fetch(process.env.BASE_URL + 'api/products');
   const data = await response.json();
 
   return {
