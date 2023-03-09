@@ -7,7 +7,7 @@ import { Product, ProductsAPIResponse } from "../types";
 // Por ahora estamos utilizando data mockeada, pero
 // debemos reemplazar esto por información proveniente de la
 // API
-export const data: ProductsAPIResponse = [
+/* export const data: ProductsAPIResponse = [
   {
     id: 1,
     title: "Mochila con correas",
@@ -17,9 +17,15 @@ export const data: ProductsAPIResponse = [
     image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     rating: 4,
   },
-];
+]; */
 
-const Home: NextPage = () => {
+
+export interface Props {
+  data: ProductsAPIResponse
+}
+
+//const Home: NextPage = () => {
+const Home = ({ data }: Props) => {
   if (!data) return null;
 
   const formatPrice: (price: number) => string = (price) =>
@@ -29,16 +35,16 @@ const Home: NextPage = () => {
     rating: number,
     maxStars?: number
   ) => JSX.Element[] = (rating, maxStars = 5) =>
-    Array.from({ length: maxStars }).map((_, index) => (
-      <Image
-        key={index}
-        alt={index <= rating ? "yellow star" : "empty star"}
-        src={index <= rating ? "/yellowStar.png" : "/emptyStar.png"}
-        layout="fixed"
-        width={20}
-        height={20}
-      />
-    ));
+      Array.from({ length: maxStars }).map((_, index) => (
+        <Image
+          key={index}
+          alt={index <= rating ? "yellow star" : "empty star"}
+          src={index <= rating ? "/yellowStar.png" : "/emptyStar.png"}
+          layout="fixed"
+          width={20}
+          height={20}
+        />
+      ));
 
   const renderProductCard: (product: Product) => JSX.Element = ({
     id,
@@ -97,5 +103,19 @@ const Home: NextPage = () => {
 
 // Aquí debemos agregar el método para obtener la información
 // de la API
+
+//Como estos datos cambia mucho "segun el ejercicio" se recomienda ServerSide
+
+export async function getServerSideProps() {
+
+  const response = await fetch('https://tienda-libre-ten.vercel.app/api/products');
+  const data = await response.json();
+
+  return {
+    props: {
+      data
+    }
+  }
+}
 
 export default Home;

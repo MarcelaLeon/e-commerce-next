@@ -1,13 +1,17 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TyC, TyCsAPIResponse } from "../types";
 import styles from "../styles/TYC.module.css";
 import Head from "next/head";
 
+interface Props {
+  data: TyCsAPIResponse
+}
+
 // Por ahora estamos utilizando data mockeada, pero
 // debemos reemplazar esto por información proveniente de la
 // API
-export const data: TyCsAPIResponse = {
+/* export const data: TyCsAPIResponse = {
   version: "3 de julio, 2022",
   tycs: [
     {
@@ -18,9 +22,25 @@ export const data: TyCsAPIResponse = {
                     comprar, pagar, enviar productos y realizar otras actividades comerciales con tecnología aplicada.`,
     },
   ],
-};
+}; */
 
-const TerminosYCondiciones: NextPage = () => {
+//const TerminosYCondiciones: NextPage = ({data}:TyCsAPIResponse) => {
+const TerminosYCondiciones = ({ data }: Props) => {
+
+  /* const [version, setVersion] = useState('');
+  const [tycs, setTycs] = useState([]);
+
+  const getTycs = async () => {
+    const response = await fetch('http://localhost:3000/api/tycs');
+    const data = await response.json();
+    setVersion(data.version)
+    setTycs(data.tycs)
+  }
+
+  useEffect(() => {
+    getTycs();
+  }, []) */
+
   if (!data) return null;
 
   const { version, tycs } = data;
@@ -50,5 +70,17 @@ const TerminosYCondiciones: NextPage = () => {
 
 // Aquí debemos agregar el método para obtener la información
 // de la API
+
+export async function getStaticProps() {
+
+  const response = await fetch('https://tienda-libre-ten.vercel.app/api/tycs');
+  const data: TyCsAPIResponse = await response.json();
+
+  return {
+    props: {
+      data
+    }
+  }
+}
 
 export default TerminosYCondiciones;
