@@ -31,7 +31,7 @@ const TerminosYCondiciones = ({ data }: Props) => {
   const [tycs, setTycs] = useState([]);
 
   const getTycs = async () => {
-    const response = await fetch('http://localhost:3000/api/tycs');
+    const response = await fetch('/api/tycs');
     const data = await response.json();
     setVersion(data.version)
     setTycs(data.tycs)
