@@ -88,21 +88,12 @@ const Home = ({ data }: Props) => {
         />
       </Head>
       <main className={styles.main}>
-        {/* <h1>Productos destacados</h1> */}
+
         <h1>{TEXTS_BY_LANGUAGE[locale].HEADER.PRODUCTS}</h1>
+
         <div className={styles.grid}>{data.map(renderProductCard)}</div>
       </main>
-      {/* <footer className={styles.footer}>
-        <span>Powered by</span>
-        <span className={styles.logo}>
-          <Image
-            src="/dh.png"
-            alt="Digital House Logo"
-            width={30}
-            height={30}
-          />
-        </span>
-      </footer> */}
+
     </div>
   );
 };

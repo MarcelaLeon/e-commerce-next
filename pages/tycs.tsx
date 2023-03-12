@@ -67,7 +67,7 @@ const TerminosYCondiciones = ({ data }: Props) => {
           content="términos y condiciones de Tienda Libre"
         />
       </Head>
-      {/* <h2>Terminos y Concidiones</h2> */}
+
       <h2>{TEXTS_BY_LANGUAGE[locale].HEADER.TYCS}</h2>
 
       <p>Versión: {version}</p>
@@ -79,7 +79,20 @@ const TerminosYCondiciones = ({ data }: Props) => {
 // Aquí debemos agregar el método para obtener la información
 // de la API
 
-export async function getStaticProps(context: any) {
+/* export async function getStaticProps(context: any) {
+
+  const lang = context.locale
+
+  const response = await fetch(process.env.BASE_URL + 'api/tycs/' + lang);
+  const data: TyCsAPIResponse = await response.json();
+
+  return {
+    props: {
+      data
+    }
+  }
+} */
+export async function getServerSideProps(context: any) {
 
   const lang = context.locale
 

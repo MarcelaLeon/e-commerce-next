@@ -22,15 +22,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* <div className={styles.navbar}>
-        <Link href="./" locale={lang}>
-          <p>{TEXTS_BY_LANGUAGE[lang].HEADER.PRODUCTS}</p>
-        </Link>
-        <Link href="./tycs" locale={lang}>
-          <p>{TEXTS_BY_LANGUAGE[lang].HEADER.TYCS}</p>
-        </Link>
-      </div> */}
-
       <div className={styles.navbar}>
         <Link href="./" locale={locale}>
           <p>{TEXTS_BY_LANGUAGE[locale].HEADER.PRODUCTS}</p>
@@ -41,7 +32,6 @@ const Header = () => {
       </div>
 
       <select onChange={(e) => {
-        //setLang(e.target.value)
         router.push('/', '/', { locale: e.target.value })
       }}>
 
