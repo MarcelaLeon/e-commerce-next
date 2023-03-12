@@ -33,6 +33,11 @@
   margin: 0 0.5rem;
 }
 
+.navbar p {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
 .appName {
   display: flex;
   flex-direction: column;

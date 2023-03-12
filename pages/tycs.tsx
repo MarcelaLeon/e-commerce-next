@@ -71,9 +71,11 @@ const TerminosYCondiciones = ({ data }: Props) => {
 // Aquí debemos agregar el método para obtener la información
 // de la API
 
-export async function getStaticProps() {
+export async function getStaticProps(context: any) {
 
-  const response = await fetch(process.env.BASE_URL + 'api/tycs');
+  const lang = context.locale
+
+  const response = await fetch(process.env.BASE_URL + 'api/tycs/' + lang);
   const data: TyCsAPIResponse = await response.json();
 
   return {

@@ -86,7 +86,7 @@ const Home = ({ data }: Props) => {
         <h1>Productos destacados</h1>
         <div className={styles.grid}>{data.map(renderProductCard)}</div>
       </main>
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         <span>Powered by</span>
         <span className={styles.logo}>
           <Image
@@ -96,7 +96,7 @@ const Home = ({ data }: Props) => {
             height={30}
           />
         </span>
-      </footer>
+      </footer> */}
     </div>
   );
 };
@@ -106,9 +106,11 @@ const Home = ({ data }: Props) => {
 
 //Como estos datos cambia mucho "segun el ejercicio" se recomienda ServerSide
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: any) {
 
-  const response = await fetch(process.env.BASE_URL + 'api/products');
+  const lang = context.locale
+
+  const response = await fetch(process.env.BASE_URL + 'api/products/' + lang);
   const data = await response.json();
 
   return {
