@@ -92,6 +92,8 @@ const TerminosYCondiciones = ({ data }: Props) => {
     }
   }
 } */
+
+/**Para desplegar en Vercel tubo que hacerse con getStaticProps */
 export async function getServerSideProps(context: any) {
 
   const lang = context.locale
