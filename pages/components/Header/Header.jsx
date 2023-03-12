@@ -8,7 +8,6 @@ import { localeNames, locales, TEXTS_BY_LANGUAGE } from "../../../locale/constan
 const Header = () => {
 
   const router = useRouter();
-  console.log(router)
   const { locale, pathname } = router;
 
   return (
