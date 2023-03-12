@@ -8,7 +8,8 @@ import { localeNames, locales, TEXTS_BY_LANGUAGE } from "../../../locale/constan
 const Header = () => {
 
   const router = useRouter();
-  const { locale } = router;
+  console.log(router)
+  const { locale, pathname } = router;
 
   return (
     <header className={styles.header}>
@@ -32,7 +33,7 @@ const Header = () => {
       </div>
 
       <select onChange={(e) => {
-        router.push('/', '/', { locale: e.target.value })
+        router.push(pathname, pathname, { locale: e.target.value })
       }}>
 
         <option value={locales['ES_ES']}>{localeNames[locales['ES_ES']]}</option>
