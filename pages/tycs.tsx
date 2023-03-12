@@ -1,12 +1,16 @@
 import { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TyC, TyCsAPIResponse } from "../types";
 import styles from "../styles/TYC.module.css";
 import Head from "next/head";
+import { TEXTS_BY_LANGUAGE } from "../locale/constants";
+import { Locale } from "./_app";
+import { useRouter } from "next/router";
 
 interface Props {
   data: TyCsAPIResponse
 }
+
 
 // Por ahora estamos utilizando data mockeada, pero
 // debemos reemplazar esto por información proveniente de la
@@ -41,6 +45,8 @@ const TerminosYCondiciones = ({ data }: Props) => {
     getTycs();
   }, []) */
 
+  const locale = useRouter().locale as keyof typeof TEXTS_BY_LANGUAGE;
+
   if (!data) return null;
 
   const { version, tycs } = data;
@@ -61,7 +67,9 @@ const TerminosYCondiciones = ({ data }: Props) => {
           content="términos y condiciones de Tienda Libre"
         />
       </Head>
-      <h2>Terminos y Concidiones</h2>
+      {/* <h2>Terminos y Concidiones</h2> */}
+      <h2>{TEXTS_BY_LANGUAGE[locale].HEADER.TYCS}</h2>
+
       <p>Versión: {version}</p>
       {tycs.map(renderTyc)}
     </div>

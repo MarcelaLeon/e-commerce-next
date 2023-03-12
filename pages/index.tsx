@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { TEXTS_BY_LANGUAGE } from "../locale/constants";
 import styles from "../styles/Home.module.css";
 import { Product, ProductsAPIResponse } from "../types";
 
@@ -26,6 +28,9 @@ export interface Props {
 
 //const Home: NextPage = () => {
 const Home = ({ data }: Props) => {
+
+  const locale = useRouter().locale as keyof typeof TEXTS_BY_LANGUAGE;
+
   if (!data) return null;
 
   const formatPrice: (price: number) => string = (price) =>
@@ -83,7 +88,8 @@ const Home = ({ data }: Props) => {
         />
       </Head>
       <main className={styles.main}>
-        <h1>Productos destacados</h1>
+        {/* <h1>Productos destacados</h1> */}
+        <h1>{TEXTS_BY_LANGUAGE[locale].HEADER.PRODUCTS}</h1>
         <div className={styles.grid}>{data.map(renderProductCard)}</div>
       </main>
       {/* <footer className={styles.footer}>

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../../styles/Header.module.css";
-import { defaultLocale, localeNames, locales, TEXTS_BY_LANGUAGE } from "../../../locale/constants";
+import { useRouter } from 'next/router'
+import { localeNames, locales, TEXTS_BY_LANGUAGE } from "../../../locale/constants";
+
 
 const Header = () => {
 
-  const [lang, setLang] = useState(defaultLocale);
+  const router = useRouter();
+  const { locale } = router;
 
   return (
     <header className={styles.header}>
@@ -20,17 +22,27 @@ const Header = () => {
         </div>
       </div>
 
-      <div className={styles.navbar}>
+      {/* <div className={styles.navbar}>
         <Link href="./" locale={lang}>
           <p>{TEXTS_BY_LANGUAGE[lang].HEADER.PRODUCTS}</p>
         </Link>
         <Link href="./tycs" locale={lang}>
           <p>{TEXTS_BY_LANGUAGE[lang].HEADER.TYCS}</p>
         </Link>
+      </div> */}
+
+      <div className={styles.navbar}>
+        <Link href="./" locale={locale}>
+          <p>{TEXTS_BY_LANGUAGE[locale].HEADER.PRODUCTS}</p>
+        </Link>
+        <Link href="./tycs" locale={locale}>
+          <p>{TEXTS_BY_LANGUAGE[locale].HEADER.TYCS}</p>
+        </Link>
       </div>
 
       <select onChange={(e) => {
-        setLang(e.target.value)
+        //setLang(e.target.value)
+        router.push('/', '/', { locale: e.target.value })
       }}>
 
         <option value={locales['ES_ES']}>{localeNames[locales['ES_ES']]}</option>
